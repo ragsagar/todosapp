@@ -95,7 +95,7 @@ eg:
     
 #### Add items to the todo list
 
-    POST /api/v1/todos/:id/
+    POST /api/v1/todos/:id/items/
     Body: { "name": "Item name", "done": <true or false> }
     Response status code 201
     
@@ -113,7 +113,7 @@ eg
     
 #### List items in the todo list
 
-    GET /api/v1/todos/:id/todo_items/
+    GET /api/v1/todos/:id/items/
     Headers: { "Authorization": "Basic <Token>"}
     Response Status code 200
     
@@ -139,7 +139,7 @@ eg
  eg
     
     curl -X PUT \
-      http://aymapp.herokuapp.com/api/v1/todos/4/todo_items/3 \
+      http://aymapp.herokuapp.com/api/v1/todos/4/items/3 \
       -H 'Authorization: Basic dG9kb2FwcDpheW1jb21tZXJjZQ==' \
       -H 'Cache-Control: no-cache' \
       -H 'Content-Type: application/json' \
@@ -158,6 +158,6 @@ eg
 eg
 
     curl -X DELETE \
-      http://aymapp.herokuapp.com/api/v1/todos/4/todo_items/3 \
+      http://aymapp.herokuapp.com/api/v1/todos/4/items/3 \
       -H 'Authorization: Basic dG9kb2FwcDpheW1jb21tZXJjZQ==' \
       -H 'Cache-Control: no-cache'
