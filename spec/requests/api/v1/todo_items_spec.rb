@@ -8,8 +8,8 @@ RSpec.describe 'Todo Items API' do
   let(:id) { todo_items.first.id }
   let(:basic_auth) { { 'Authorization' => "Basic #{Base64::encode64('todoapp:aymcommerce')}" } }
 
-  describe 'GET /api/v1/todos/:todo_id/todo_items/' do
-    before { get "/api/v1/todos/#{todo_id}/todo_items", headers: basic_auth}
+  describe 'GET /api/v1/todos/:todo_id/items/' do
+    before { get "/api/v1/todos/#{todo_id}/items", headers: basic_auth}
 
     context "when todo exists" do
       it 'returns status code 200' do
@@ -34,8 +34,8 @@ RSpec.describe 'Todo Items API' do
     end
   end
 
-  describe 'GET /api/v1/todos/:todo_id/todo_items/:id' do
-    before { get "/api/v1/todos/#{todo_id}/todo_items/#{id}", headers: basic_auth}
+  describe 'GET /api/v1/todos/:todo_id/items/:id' do
+    before { get "/api/v1/todos/#{todo_id}/items/#{id}", headers: basic_auth}
 
     context 'when todo item exists' do
       it 'return status code 200' do
@@ -60,10 +60,10 @@ RSpec.describe 'Todo Items API' do
     end
   end
 
-  describe 'POST /api/v1/todos/:todos_id/todo_items/' do
+  describe 'POST /api/v1/todos/:todos_id/items/' do
     let(:input_data) { { name: 'Cook dinner', done: false } }
     context 'when valid input data is given' do
-      before { post "/api/v1/todos/#{todo_id}/todo_items", params: input_data, headers: basic_auth}
+      before { post "/api/v1/todos/#{todo_id}/items", params: input_data, headers: basic_auth}
 
       it 'return status code 201' do
         expect(response).to have_http_status(201)
@@ -72,7 +72,7 @@ RSpec.describe 'Todo Items API' do
 
     context 'when request is invalid' do
       let (:invalid_input) { { done: false } }
-      before { post "/api/v1/todos/#{todo_id}/todo_items", params: invalid_input, headers: basic_auth}
+      before { post "/api/v1/todos/#{todo_id}/items", params: invalid_input, headers: basic_auth}
 
       it 'return status code 422' do
         expect(response).to have_http_status(422)
@@ -84,10 +84,10 @@ RSpec.describe 'Todo Items API' do
     end
   end
 
-  describe 'PUT /api/v1/todos/:todos_id/todo_items/:id' do
+  describe 'PUT /api/v1/todos/:todos_id/items/:id' do
     let(:input_data) { { name: 'Washing clothes', done: true } }
 
-    before { put "/api/v1/todos/#{todo_id}/todo_items/#{id}", params: input_data, headers: basic_auth }
+    before { put "/api/v1/todos/#{todo_id}/items/#{id}", params: input_data, headers: basic_auth }
 
     context 'when todo item exists' do
       it 'returns status code 204' do
@@ -115,10 +115,10 @@ RSpec.describe 'Todo Items API' do
   end
 
 
-  describe 'DELETE /api/v1/todos/:todos_id/todo_items/:id' do
+  describe 'DELETE /api/v1/todos/:todos_id/items/:id' do
 
     context 'when todo item exists' do
-      before { delete "/api/v1/todos/#{todo_id}/todo_items/#{id}", headers: basic_auth }
+      before { delete "/api/v1/todos/#{todo_id}/items/#{id}", headers: basic_auth }
 
       it 'delete db record' do
         todo_item = TodoItem.find_by(id: id)
@@ -136,7 +136,7 @@ RSpec.describe 'Todo Items API' do
 
     context "when todo item doesn't exist" do
       let(:id) { 1000 }
-      before { delete "/api/v1/todos/#{todo_id}/todo_items/#{id}", headers: basic_auth }
+      before { delete "/api/v1/todos/#{todo_id}/items/#{id}", headers: basic_auth }
 
       it 'return status code 404' do
         expect(response).to have_http_status(404)

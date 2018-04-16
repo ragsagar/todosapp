@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :todos do
-        resources :todo_items
+        resources :todo_items, :path => "items"
       end
     end
   end

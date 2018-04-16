@@ -102,7 +102,7 @@ eg:
 eg
 
     curl -X POST \
-      http://aymapp.herokuapp.com/api/v1/todos/4/todo_items/ \
+      http://aymapp.herokuapp.com/api/v1/todos/4/items/ \
       -H 'Authorization: Basic dG9kb2FwcDpheW1jb21tZXJjZQ==' \
       -H 'Cache-Control: no-cache' \
       -H 'Content-Type: application/json' \
@@ -120,7 +120,7 @@ eg
 eg
 
     curl -X GET \
-      http://aymapp.herokuapp.com/api/v1/todos/4/todo_items/ \
+      http://aymapp.herokuapp.com/api/v1/todos/4/items/ \
       -H 'Authorization: Basic dG9kb2FwcDpheW1jb21tZXJjZQ==' \
       -H 'Cache-Control: no-cache' \
       -H 'Content-Type: application/json' \
@@ -131,7 +131,7 @@ eg
     
 #### Update items in the todo list
 
-    PUT /api/v1/todos/:todo_id/todo_items/:item_id
+    PUT /api/v1/todos/:todo_id/items/:item_id
     Headers: { "Authorization": "Basic <Token>"}
     Body: { "name": "Name to update", done": <true or false> }
     Response status code 204
@@ -151,7 +151,7 @@ eg
 #### Remove an item in todo list
 
 
-    DELETE /api/v1/todos/:todo_id/todo_items/:item_id
+    DELETE /api/v1/todos/:todo_id/items/:item_id
     Headers: { "Authorization": "Basic <Token>"}
     Response status code 204
     
