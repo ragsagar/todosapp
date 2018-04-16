@@ -29,6 +29,12 @@
         
 ## Api Documentation
 
+#### Basic authentication
+
+Following authorization header should be passed for basic authentication:
+
+    Authorization: Basic dG9kb2FwcDpheW1jb21tZXJjZQ=="
+
 #### Create a new todo list.
 
     POST /api/v1/todos/
