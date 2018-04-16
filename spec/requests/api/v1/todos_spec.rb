@@ -4,9 +4,10 @@ RSpec.describe 'Todo List API', type: :request do
   # Initialize data
   let!(:todos) { create_list(:todo, 5) }
   let(:todo_id) { todos.first.id }
+  let(:basic_auth) { { 'Authorization' => "Basic #{Base64::encode64('todoapp:aymcommerce')}" } }
 
   describe 'GET /api/v1/todos' do
-    before { get '/api/v1/todos' }
+    before { get '/api/v1/todos', headers: basic_auth }
 
     it 'returns status code 200' do
       expect(response).to have_http_status(200)
@@ -20,7 +21,7 @@ RSpec.describe 'Todo List API', type: :request do
   end
 
   describe 'GET /api/v1/todos/:id' do
-    before { get "/api/v1/todos/#{todo_id}" }
+    before { get "/api/v1/todos/#{todo_id}", headers: basic_auth }
 
     context 'when the todo list exists' do
       it 'return ok status 200' do
@@ -47,7 +48,7 @@ RSpec.describe 'Todo List API', type: :request do
     let(:input_data) { { title: 'Todays todos', 'created_by': '1' } }
 
     context 'when valid request to create' do 
-      before { post '/api/v1/todos', params: input_data }
+      before { post '/api/v1/todos', params: input_data, headers: basic_auth }
 
       it 'returns created status code 201' do
         expect(response).to have_http_status(201)
@@ -64,7 +65,7 @@ RSpec.describe 'Todo List API', type: :request do
     end
 
     context 'when request is invalid' do
-      before { post '/api/v1/todos', params: { title: 'Tomorrow todos' } }
+      before { post '/api/v1/todos', params: { title: 'Tomorrow todos' }, headers: basic_auth }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -80,7 +81,7 @@ RSpec.describe 'Todo List API', type: :request do
     let(:input_data) { { title: 'Tomorrow todos' } }
 
     context 'when the todo item exists' do
-      before { put "/api/v1/todos/#{todo_id}", params: input_data }
+      before { put "/api/v1/todos/#{todo_id}", params: input_data, headers: basic_auth}
 
       it 'returns status code 204' do
         expect(response).to have_http_status(204)
@@ -98,7 +99,7 @@ RSpec.describe 'Todo List API', type: :request do
   end
 
   describe 'DELETE /api/v1/todos/:id' do
-    before { delete "/api/v1/todos/#{todo_id}" }
+    before { delete "/api/v1/todos/#{todo_id}", headers: basic_auth}
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)
