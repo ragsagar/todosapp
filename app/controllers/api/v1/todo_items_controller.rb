@@ -12,8 +12,8 @@ module Api::V1
     end
 
     def create
-      @todo.todo_items.create!(todo_item_params)
-      json_response(@todo, :created)
+      item = @todo.todo_items.create!(todo_item_params)
+      json_response(item, :created)
     end
 
     def update

@@ -68,6 +68,11 @@ RSpec.describe 'Todo Items API' do
       it 'return status code 201' do
         expect(response).to have_http_status(201)
       end
+
+      it 'check db record' do
+        item = TodoItem.find_by(id: json['id'])
+        expect(item.name).to eq('Cook dinner')
+      end
     end
 
     context 'when request is invalid' do
